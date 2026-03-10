@@ -156,11 +156,11 @@ flowchart TD
     A[Start] --> B[Select all Trips]
 
     B --> C{Today < Start_Date ?}
-    C -->|Yes| D[Status = "A venir"]
+    C -->|Yes| D[Status = A_venir]
     C -->|No| E{Today <= End_Date ?}
 
-    E -->|Yes| F[Status = "En cours"]
-    E -->|No| G[Status = "Terminé"]
+    E -->|Yes| F[Status = En_cours]
+    E -->|No| G[Status = Termine]
 
     D --> H[Update Trip]
     F --> H
