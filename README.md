@@ -42,45 +42,6 @@ flowchart TD
 
 ## 🧠 Diagrammes UML
 
-## 🎯 Diagramme d’usage (Use Case)
-
-```mermaid
-flowchart LR
-
-    %% --- Acteurs (alignés verticalement) ---
-    subgraph Actors[ ]
-        direction TB
-        Commercial([🧑 Commercial])
-        SalesforceSystem([🏢 Salesforce System])
-        BatchSystem([⚙️ Batch System])
-    end
-
-    %% --- Système ---
-    subgraph System[GlobalGroupTravel CRM]
-        direction TB
-        UC1(Creer ou MAJ Trip)
-        UC2(Creer ou MAJ Opportunite)
-        UC3(MAJ statut Trip)
-        UC4(Creation auto Trip si Closed Won)
-        UC5(Associer Trip a Account et Opp)
-        UC6(Annuler Trips < 10 participants J-7)
-        UC7(Verifier coherence des dates)
-    end
-
-    %% --- Relations ---
-    Commercial --> UC1
-    Commercial --> UC2
-    Commercial --> UC3
-
-    SalesforceSystem --> UC4
-    SalesforceSystem --> UC5
-
-    BatchSystem --> UC6
-    BatchSystem --> UC7
-```
-
-
-
 
 ### Diagramme de Classes
 
