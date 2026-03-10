@@ -226,4 +226,4 @@ flowchart TD
 
 Murielle Majesté – Développeuse Salesforce  
 GitHub : https://github.com/muriellemajeste1971-collab  
-LinkedIn : https://www.linkedin.com/in/murielle-majeste  
+LinkedIn : https://www.linkedin.com/in/murielle-majesté-52698620 
