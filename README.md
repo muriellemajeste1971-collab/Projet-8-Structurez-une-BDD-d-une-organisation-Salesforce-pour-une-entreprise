@@ -18,10 +18,10 @@ Développement d’un back-end Salesforce complet pour automatiser la gestion de
 GlobalGroupTravel souhaite optimiser ses processus de vente et de suivi client via une solution CRM Salesforce.  
 Le projet inclut :
 
-- Création de l’objet personnalisé `Trip__c`  
-- Triggers Apex pour automatiser la création et la validation  
-- Batchs Apex pour annulation et mise à jour des statuts  
-- Relations entre Account, Opportunity, Trip__c, Task, User  
+- Création de l’objet personnalisé `Trip__c`
+- Automatisation via triggers Apex
+- Batchs Apex pour annulation et mise à jour des statuts
+- Relations entre Account, Opportunity, Trip__c, Task, User
 - 100 % de couverture de test
 
 ---
@@ -36,8 +36,15 @@ flowchart TD
     D --> E[Trip__c]
     C --> F[Batch GGT-04]
     C --> G[Batch GGT-05]
+```
 
+---
 
+## 🧠 Diagrammes UML
+
+### Diagramme de Classes
+
+```mermaid
 classDiagram
     class Account {
         - idAccount
@@ -96,3 +103,87 @@ classDiagram
     Opportunity --> Trip__c : crée >
     User --> Task : assigne >
     Account --> Task : associé à >
+```
+
+---
+
+## 🎭 Diagrammes Mermaid
+
+### Séquence – Trigger Opportunity
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Commercial
+    participant TriggerOpp as Opportunity Trigger
+    participant Service as TripService
+    participant Trip as Trip__c
+    participant DB as Database
+
+    Commercial ->> TriggerOpp: Update Opportunity\n(Stage = Closed Won)
+    TriggerOpp ->> TriggerOpp: Check StageName == "Closed Won"
+    TriggerOpp ->> Service: createTripFromOpportunity(opp)
+
+    Service ->> Trip: new Trip__c()
+    Service ->> Trip: mapFieldsFromOpportunity()
+    Service ->> DB: insert Trip__c
+
+    DB -->> Service: Trip created
+    Service -->> TriggerOpp: Confirmation
+    TriggerOpp -->> Commercial: Trip created automatically
+```
+
+### Activité – Batch GGT-04
+
+```mermaid
+flowchart TD
+    A[Start] --> B[Select Trips\nStart_Date = Today + 7 days]
+    B --> C{Participants < 10 ?}
+
+    C -->|Yes| D[Set Status = "Annulé"]
+    D --> E[Update Trip]
+
+    C -->|No| F[Do nothing]
+
+    E --> G[Stop]
+    F --> G
+```
+
+### Activité – Batch GGT-05
+
+```mermaid
+flowchart TD
+    A[Start] --> B[Select all Trips]
+
+    B --> C{Today < Start_Date ?}
+    C -->|Yes| D[Status = "A venir"]
+    C -->|No| E{Today <= End_Date ?}
+
+    E -->|Yes| F[Status = "En cours"]
+    E -->|No| G[Status = "Terminé"]
+
+    D --> H[Update Trip]
+    F --> H
+    G --> H
+
+    H --> I[Stop]
+```
+
+---
+
+## 🛠️ Technologies utilisées
+
+- Salesforce Apex  
+- Triggers & Batch Apex  
+- Salesforce DX  
+- Git & GitHub  
+- Mermaid (diagrammes)  
+- VS Code  
+
+---
+
+## 👩‍💻 Auteur
+
+Murielle Majesté – Développeuse Salesforce  
+GitHub : https://github.com/muriellemajeste1971-collab  
+LinkedIn : https://www.linkedin.com/in/murielle-majeste  
