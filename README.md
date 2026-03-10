@@ -46,13 +46,18 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    %% Acteurs (imitations des acteurs UML)
-    Commercial([🧑 Commercial])
-    SalesforceSystem([💼 Salesforce System])
-    BatchSystem([⚙️ Batch System])
 
-    %% Système
+    %% --- Acteurs (alignés verticalement) ---
+    subgraph Actors[ ]
+        direction TB
+        Commercial([🧑 Commercial])
+        SalesforceSystem([🏢 Salesforce System])
+        BatchSystem([⚙️ Batch System])
+    end
+
+    %% --- Système ---
     subgraph System[GlobalGroupTravel CRM]
+        direction TB
         UC1(Creer ou MAJ Trip)
         UC2(Creer ou MAJ Opportunite)
         UC3(MAJ statut Trip)
@@ -62,7 +67,7 @@ flowchart LR
         UC7(Verifier coherence des dates)
     end
 
-    %% Relations
+    %% --- Relations ---
     Commercial --> UC1
     Commercial --> UC2
     Commercial --> UC3
@@ -73,6 +78,7 @@ flowchart LR
     BatchSystem --> UC6
     BatchSystem --> UC7
 ```
+
 
 
 
