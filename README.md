@@ -42,6 +42,32 @@ flowchart TD
 
 ## 🧠 Diagrammes UML
 
+## 🎯 Diagramme d’usage (Use Case)
+
+```mermaid
+flowchart LR
+    subgraph System[GlobalGroupTravel CRM]
+        UC1(Creer ou Mettre a jour un Trip)
+        UC2(Creer ou Mettre a jour une Opportunite)
+        UC3(Mettre a jour le statut des Trips)
+        UC4(Creation automatique d un Trip si Closed Won)
+        UC5(Associer Trip a Account et Opportunity)
+        UC6(Annuler Trips < 10 participants a J-7)
+        UC7(Verifier coherence des dates)
+    end
+
+    Commercial([Commercial]) --> UC1
+    Commercial --> UC2
+    Commercial --> UC3
+
+    BatchSystem([Batch System]) --> UC6
+    BatchSystem --> UC7
+
+    SalesforceSystem([Salesforce System]) --> UC4
+    SalesforceSystem --> UC5
+```
+
+
 ### Diagramme de Classes
 
 ```mermaid
