@@ -37,7 +37,6 @@ flowchart TD
     C --> F[Batch GGT-04]
     C --> G[Batch GGT-05]
 
-## 🧱 Diagrammes UML
 
 classDiagram
     class Account {
