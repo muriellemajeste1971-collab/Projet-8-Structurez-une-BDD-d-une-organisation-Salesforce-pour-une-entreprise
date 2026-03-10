@@ -1,23 +1,38 @@
-<<<<<<< HEAD
-# Salesforce DX Project: Next Steps
+# Projet 8 – Salesforce CRM pour GlobalGroupTravel
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Développement d’un back-end Salesforce complet pour automatiser la gestion des voyages de groupe (Trip__c) à partir des opportunités gagnées.
 
-## How Do You Plan to Deploy Your Changes?
+## 🧭 Sommaire
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- [Contexte](#contexte)
+- [Architecture](#architecture)
+- [Diagrammes UML](#diagrammes-uml)
+- [Diagrammes Mermaid](#diagrammes-mermaid)
+- [Technologies utilisées](#technologies-utilisées)
+- [Auteur](#auteur)
 
-## Configure Your Salesforce DX Project
+---
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## 📌 Contexte
 
-## Read All About It
+GlobalGroupTravel souhaite optimiser ses processus de vente et de suivi client via une solution CRM Salesforce.  
+Le projet inclut :
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
-=======
-# Projet-8-Structurez-une-BDD-d-une-organisation-Salesforce-pour-une-entreprise
-Projet 8 : Structurez une BDD d'une organisation Salesforce pour une entreprise
->>>>>>> 97c4a0500beb6ee31a23d61e8eec0593cf2ba4d3
+- Création de l’objet personnalisé `Trip__c`  
+- Triggers Apex pour automatiser la création et la validation  
+- Batchs Apex pour annulation et mise à jour des statuts  
+- Relations entre Account, Opportunity, Trip__c, Task, User  
+- 100 % de couverture de test
+
+---
+
+## 🧱 Architecture
+
+```mermaid
+flowchart TD
+    A[Selector] --> B[Orchestrator]
+    B --> C[Service]
+    C --> D[Trigger]
+    D --> E[Trip__c]
+    C --> F[Batch GGT-04]
+    C --> G[Batch GGT-05]
