@@ -140,7 +140,7 @@ flowchart TD
     A[Start] --> B[Select Trips\nStart_Date = Today + 7 days]
     B --> C{Participants < 10 ?}
 
-    C -->|Yes| D[Set Status = "Annulé"]
+    C -->|Yes| D[Set Status = Annulé]
     D --> E[Update Trip]
 
     C -->|No| F[Do nothing]
