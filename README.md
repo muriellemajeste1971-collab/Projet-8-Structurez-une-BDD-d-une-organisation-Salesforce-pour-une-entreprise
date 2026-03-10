@@ -36,3 +36,64 @@ flowchart TD
     D --> E[Trip__c]
     C --> F[Batch GGT-04]
     C --> G[Batch GGT-05]
+
+## 🧱 Diagrammes UML
+
+classDiagram
+    class Account {
+        - idAccount
+        - Name
+        - Phone
+        - Email
+        + getOpportunities()
+        + getTrips()
+    }
+
+    class Opportunity {
+        - idOpportunity
+        - Amount
+        - StageName
+        - Destination__c
+        - Start_Date__c
+        - End_Date__c
+        - Number_of_Participants__c
+        + updateStage()
+        + createTrip()
+    }
+
+    class Trip__c {
+        - idTrip
+        - TripName
+        - Status__c
+        - Destination__c
+        - Start_Date__c
+        - End_Date__c
+        - Number_of_Participants__c
+        - Total_Cost__c
+        + validateDates()
+        + updateStatus()
+    }
+
+    class Task {
+        - idTask
+        - Subject
+        - ActivityDate
+        - Status
+        + createTask()
+        + closeTask()
+    }
+
+    class User {
+        - idUser
+        - Name
+        - Role
+        - Email
+        + assignTask()
+        + manageOpportunities()
+    }
+
+    Account --> Opportunity : possède >
+    Account --> Trip__c : lié à >
+    Opportunity --> Trip__c : crée >
+    User --> Task : assigne >
+    Account --> Task : associé à >
