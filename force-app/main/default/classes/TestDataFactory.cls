@@ -131,7 +131,7 @@ public class TestDataFactory {
             CloseDate = Date.today().addDays(30),
             Destination__c = 'Paris',
             Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(20),
+            End_Date__c = Date.today().addDays(15),
             Number_of_Participants__c = 4,
             Amount = 10000
         );
