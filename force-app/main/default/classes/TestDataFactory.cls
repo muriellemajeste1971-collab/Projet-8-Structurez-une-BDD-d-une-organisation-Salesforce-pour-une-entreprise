@@ -117,12 +117,31 @@ public class TestDataFactory {
     	public static Account createAccount() {
         
      	Account a = new Account (
-								Name = 'Account 1', 
-         						Customer_Type__c = 'Particulier'); 
+								Name = 'Account 1'); 
         insert a;
 		return a;
         
     }
+
+    public static Opportunity createOpportunity(Id accountId, String stageName) { 
+        Opportunity opp = new Opportunity(
+            Name = 'Opportunity 1',
+            AccountId = accountId,
+            StageName = stageName,
+            CloseDate = Date.today().addDays(30),
+            Destination__c = 'Paris',
+            Start_Date__c = Date.today().addDays(10),
+            End_Date__c = Date.today().addDays(20),
+            Number_of_Participants__c = 4,
+            Amount = 10000
+        );
+        insert opp;
+        return opp;
+   
+    }
+
+
+ 
 
    		public static Contract createContract(Id accountId) {
         
@@ -247,53 +266,9 @@ public class TestDataFactory {
 }
 
     
-    public static Transporteur__c createTransporteur(String typeClient) {
-        
-     Transporteur__c tr = new Transporteur__c (
-        Name = 'Transporteur 1', 
-        Customer_Type__c = typeClient ); 
-        insert tr;
-		return tr;
-        
-    }
+  
     
     
-    public static List<Tarification__c> createTarificationList() {
-
-    List<Tarification__c> liste = new List<Tarification__c>();
-        
-    Transporteur__c tr = createTransporteur('Particulier');
-
-    Tarification__c t1 = new Tarification__c(
-        Name = 'Transporteur 1 (France : Particulier ; 7 € ; 6 jours)',
-        Zone_de_livraison__c = 'France',
-        Tarif_de_livraison__c = 7,
-        D_lai_de_Livraison_jours__c = 6,
-        Transporteur__c = tr.Id
-    );
-
-    Tarification__c t2 = new Tarification__c(
-        Name = 'Transporteur 2 (France : Particulier)',
-        Zone_de_livraison__c = 'France',
-        Tarif_de_livraison__c = 10,
-        D_lai_de_Livraison_jours__c = 4,
-        Transporteur__c = tr.Id
-    );
-
-    Tarification__c t3 = new Tarification__c(
-        Name = 'Transporteur 3 (France : Particulier ; 20€ ; 1 jour)',
-        Zone_de_livraison__c = 'France',
-        Tarif_de_livraison__c = 20,
-        D_lai_de_Livraison_jours__c = 1,
-        Transporteur__c = tr.Id
-    );
-
-    liste.add(t1);
-    liste.add(t2);
-    liste.add(t3);
-
-    insert liste;
-    return liste;
- }
+    
 
 }
