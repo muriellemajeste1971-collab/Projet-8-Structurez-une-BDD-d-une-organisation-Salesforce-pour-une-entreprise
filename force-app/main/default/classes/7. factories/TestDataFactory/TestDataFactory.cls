@@ -1,168 +1,38 @@
 @isTest
 public class TestDataFactory {
 
-    // ---------------------------------------------------------
-    // 1. Données pour les tests Opportunity / Product
-    // ---------------------------------------------------------
-    public static OpportunityLineItem createOpportunityLineItem() {
-        Id stdPbId = Test.getStandardPricebookId();
+    // Create dummy users for Unit Tests
+    public static List<User> createUsers(List<String> profileNames) {
 
-        Pricebook2 stdPb = new Pricebook2(
-            Id = stdPbId,
-            IsActive = true
-        );
-        update stdPb;
-
-        Product2 p0 = new Product2(
-            Name = 'Audi e-Tron',
-            ProductCode = 'AUDI-ET',
-            IsActive = true
-        );
-        insert p0;
+        List<Profile> profiles = ProfileFactory.assemble(profileNames); 
+        List<User> users = UserFactory.assemble(profiles); 
+        return users; 
+    }
+    
+    // Create dummy accounts for unit tests
+    public static List<Account> createAccounts(Integer numberOfAcounts ) {
         
-        List<Product2> produits = new List<Product2>{
-        new Product2(Name = 'Produit 1', IsActive = true),
-        new Product2(Name = 'Produit 2', IsActive = true),  
-        new Product2(Name = 'Produit 3', IsActive = true), 
-        new Product2(Name = 'Produit 4', IsActive = true)
-	    };
-	    insert produits;
+        List<Account> accounts = AccountFactory.assemble(numberOfAcounts);
+        return accounts;
+    }
 
-        PricebookEntry stdPbe = new PricebookEntry(
-            Pricebook2Id = stdPbId,
-            Product2Id = p0.Id,
-            UnitPrice = 50000,
-            IsActive = true
-        );
-        insert stdPbe;
-        
-        Id pbId = Test.getStandardPricebookId();
+    // Create dummy opportunities for unit tests
+    public static List<Opportunity> createOpportunities(Integer numberOfOpportunities, List<Id> accountIds) { 
 
-		List<PricebookEntry> pbes = new List<PricebookEntry>();
-		for (Product2 p2 : produits) {
-    	pbes.add(new PricebookEntry(
-        Pricebook2Id = pbId,
-        Product2Id = p2.Id,
-        UnitPrice = 10000,
-        IsActive = true
-    ) );
-   }
-   insert pbes;
+        List<Opportunity> opportunities = OpportunityFactory.assemble(numberOfOpportunities, accountIds);
+        return opportunities;
+    }
 
-
-        Pricebook2 customPb = new Pricebook2(
-            Name = 'Test Pricebook',
-            IsActive = true
-        );
-        insert customPb;
-
-        PricebookEntry customPbe = new PricebookEntry(
-            Pricebook2Id = customPb.Id,
-            Product2Id = p0.Id,
-            UnitPrice = 50000,
-            IsActive = true
-        );
-        insert customPbe;
-
-        Opportunity opp = new Opportunity(
-            Name = 'Test Opportunity',
-            StageName = 'Prospecting',
-            CloseDate = Date.today()
-        );
-        insert opp;
-
-        OpportunityLineItem oli = new OpportunityLineItem(
-            OpportunityId = opp.Id,
-            PricebookEntryId = customPbe.Id,
-            Quantity = 2,
-            UnitPrice = 50000
-        );
-        insert oli;
-
-        return oli;
+    public static List<Trip__c> createTrips(List<Opportunity> opportunities) {
+        List<Trip__c> trips = TripFactory.assemble(opportunities);
+        return trips;
+       
     }
 
 
-    
-    
-    
-
-    // ---------------------------------------------------------
-    // 2. Données pour les tests User / Profil
-    // ---------------------------------------------------------
-    public static User createUser() {
-
-        Profile p = [SELECT Id FROM Profile WHERE Name = 'Sales' LIMIT 1];
-
-        User u = new User(
-            FirstName = 'Test',
-            LastName = 'User',
-            Email = 'test.user@example.com',
-            Username = 'test.user+' + System.currentTimeMillis() + '@example.com',
-            Alias = 'tuser',
-            TimeZoneSidKey = 'Europe/Paris',
-            LocaleSidKey = 'fr_FR',
-            EmailEncodingKey = 'UTF-8',
-            LanguageLocaleKey = 'fr',
-            ProfileId = p.Id
-        );
-
-        insert u;
-        return u;
-    }
-
-      
-    
-    
-    	public static Account createAccount() {
-        
-     	Account a = new Account (
-								Name = 'Account 1'); 
-        insert a;
-		return a;
-        
-    }
-
-    public static Opportunity createOpportunity(Id accountId, String stageName) { 
-        Opportunity opp = new Opportunity(
-            Name = 'Opportunity 1',
-            AccountId = accountId,
-            StageName = stageName,
-            CloseDate = Date.today().addDays(30),
-            Destination__c = 'Paris',
-            Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(15),
-            Number_of_Participants__c = 4,
-            Amount = 10000
-        );
-        insert opp;
-        return opp;
-   
-    }
-
-
- 
-
-   		public static Contract createContract(Id accountId) {
-        
-     	Contract c = new Contract (
-								Name = 'Contract 1 for Account 1', 
-         						AccountId = accountId,
-     							StartDate = Date.Today(),
-     							Status = 'Draft'); 
-        insert c;
-        
-        c.Status ='Activated';
-        c.ActivatedDate = Date.Today();
-        update c;
- 		return c;
-        
-    }
-    
-     
     public static Order createOrder(Id accountId, Id contractId) {
 	// 1. Récupération du standard pricebook
-   		 Id pbId = Test.getStandardPricebookId();
+   		Id pbId = Test.getStandardPricebookId();
 
         
     // 2. Création de la commande

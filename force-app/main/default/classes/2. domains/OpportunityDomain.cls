@@ -2,6 +2,8 @@ public with sharing class OpportunityDomain {
 
     public static List<Id> validateBeforeUpdate(Map<Id, Opportunity> oldMap, Map<Id, Opportunity> newMap) {
 
+            if (oldMap == null || newMap == null || newMap.isEmpty()) return new List<Id>();
+            
         List<Id> oppIdsToProcess = new List<Id>();
 
             for (Opportunity newOpp : newMap.values()) {

@@ -9,7 +9,7 @@ public with sharing class OpportunityTriggerHandler {
                 (Map<Id, Opportunity>) Trigger.newMap
             );
 
-            OpportunityService.createTrip(oppIds);
+            OpportunityService.createTrips(oppIds);
         }
     }
 }

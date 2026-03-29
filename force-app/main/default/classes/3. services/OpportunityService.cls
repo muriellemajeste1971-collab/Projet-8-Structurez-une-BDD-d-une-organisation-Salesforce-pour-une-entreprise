@@ -1,7 +1,7 @@
 public with sharing class OpportunityService {
     
     @AuraEnabled
-    public static List<Trip__c> createTrip(List<Id> oppIds) {
+    public static List<Trip__c> createTrips(List<Id> oppIds) {
 
         if (oppIds.isEmpty()) return new List<Trip__c>();
 
