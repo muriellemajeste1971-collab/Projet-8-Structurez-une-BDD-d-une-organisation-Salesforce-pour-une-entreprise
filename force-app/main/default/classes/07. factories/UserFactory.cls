@@ -4,6 +4,10 @@ public with sharing class UserFactory {
 
         List<User> users = new List<User>();
 
+        // Rôle générique pour les tests
+        UserRole r = new UserRole(Name = 'TestRole');
+        insert r;
+
         for (Profile p : profiles) {
 
             Long ts = System.currentTimeMillis();
@@ -18,7 +22,8 @@ public with sharing class UserFactory {
                 LocaleSidKey = 'fr_FR',
                 EmailEncodingKey = 'UTF-8',
                 LanguageLocaleKey = 'fr',
-                ProfileId = p.Id
+                ProfileId = p.Id,
+                UserRoleId = r.Id
             );
 
             users.add(u);
